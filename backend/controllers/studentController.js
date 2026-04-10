@@ -1,63 +1,49 @@
-// const Student = require("../models/Student");
 
+import Student from "../models/Student.js";
 
-
-// // CREATE
-// exports.createStudent = async (req, res) => {
-//   const student = await Student.create(req.body);
-//   res.json(student);
-// };
-
-// // READ ALL
-// exports.getStudents = async (req, res) => {
-//   const students = await Student.find();
-//   res.json(students);
-// };
-
-// // UPDATE
-// exports.updateStudent = async (req, res) => {
-//   const student = await Student.findByIdAndUpdate(
-//     req.params.id,
-//     req.body,
-//     { new: true }
-//   );
-//   res.json(student);
-// };
-
-// // DELETE
-// exports.deleteStudent = async (req, res) => {
-//   await Student.findByIdAndDelete(req.params.id);
-//   res.json({ message: "Deleted" });
-// };
-
-
-
-const Student = require("../models/Student");
 
 // CREATE
-exports.createStudentController = async (req, res) => {
-  const student = await Student.create(req.body);
-  res.json(student);
+export const createStudentController = async (req, res) => {
+  try {
+    const student = await Student.create(req.body);
+    res.json(student);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 // READ
-exports.getAllStudents = async (req, res) => {
-  const students = await Student.find();
-  res.json(students);
+export const getAllStudents = async (req, res) => {
+  try {
+    const students = await Student.find();
+    res.json(students);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
+
 
 // UPDATE
-exports.updateStudentController = async (req, res) => {
-  const student = await Student.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
-  res.json(student);
+export const updateStudentController = async (req, res) => {
+  try {
+    const student = await Student.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(student);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
+
 // DELETE
-exports.deleteStudentController = async (req, res) => {
-  await Student.findByIdAndDelete(req.params.id);
-  res.json({ message: "Deleted" });
+export const deleteStudentController = async (req, res) => {
+  try {
+    await Student.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
